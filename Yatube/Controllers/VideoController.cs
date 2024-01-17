@@ -19,18 +19,13 @@ namespace Yatube.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Video>> Get()
+        public IAsyncEnumerable<Video> Get()
         {
-            throw new NotImplementedException();
+            var videos = _Context.Videos;
+            if (videos == null)
+                throw new NullReferenceException();
 
-
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = Random.Shared.Next(-20, 55),
-            //    Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            //})
-            //.ToArray();
+            return videos.AsAsyncEnumerable();
         }
     }
 }

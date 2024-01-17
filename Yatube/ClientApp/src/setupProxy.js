@@ -2,17 +2,28 @@ const createProxyMiddleware = require('http-proxy-middleware');
 const { env } = require('process');
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:58301';
+    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:58301';
 
-const context =  [
-  "/weatherforecast",
+const context = [
+    "/weatherforecast",
+    "/video",
+    "/staticfiles"
 ];
 
-module.exports = function(app) {
-  const appProxy = createProxyMiddleware(context, {
-    target: target,
-    secure: false
-  });
+module.exports = function (app) {
+    // todo: ¹ºÁö °øºÎÇØ
+    app.use(function (req, res, next) {
+        res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+        res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+        next();
+    });
 
-  app.use(appProxy);
+    const appProxy = createProxyMiddleware(context, {
+        target: target,
+        secure: false
+    });
+
+    app.use(appProxy);
+
+
 };

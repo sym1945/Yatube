@@ -37,10 +37,26 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\Index.tsx" />
+    <None Remove="ClientApp\src\components\VideoDetail.tsx" />
+    <None Remove="ClientApp\src\components\Videos.tsx" />
+    <None Remove="ClientApp\src\components\VideoThumbnail.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\components\NavMenu.tsx" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\Index.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="ClientApp\src\components\VideoDetail.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\components\Videos.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
