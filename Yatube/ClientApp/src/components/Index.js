@@ -1,10 +1,9 @@
-﻿import * as React from 'react';
-import { Container } from 'react-bootstrap';
-import { VideoThumbnailProps, VideoThumbnailGroup } from './VideoThumbnail';
-
-
-
-const dummyDatas: Array<VideoThumbnailProps> = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var react_bootstrap_1 = require("react-bootstrap");
+var VideoThumbnail_1 = require("./VideoThumbnail");
+var dummyDatas = [
     {
         imgSrc: 'staticfiles/test.jpg', title: 'fc2-ppv-111111', viewCount: 1
     },
@@ -29,34 +28,23 @@ const dummyDatas: Array<VideoThumbnailProps> = [
     {
         imgSrc: 'staticfiles/test.jpg', title: 'fc2-ppv-111111', viewCount: 8
     },
-]
-
-const getThumbnailGroups = (arr: Array<VideoThumbnailProps>, size: number) => {
-    let i: number;
-    let j: number;
-    let chunk: number = size;
-    let temparray: Array<Array<VideoThumbnailProps>> = [];
+];
+var getThumbnailGroups = function (arr, size) {
+    var i;
+    var j;
+    var chunk = size;
+    var temparray = [];
     for (i = 0, j = arr.length; i < j; i += chunk) {
-        let g = arr.slice(i, i + chunk);
+        var g = arr.slice(i, i + chunk);
         temparray.push(g);
     }
-
-    return temparray
-}
-
-const Index = () => {
-    return (
-        <Container>
-            {
-                getThumbnailGroups(dummyDatas, 4).map(grp => 
-                    <VideoThumbnailGroup group={grp} />
-                )
-            }
-        </Container>
-    );
-}
-
-Index.displayName = Index.name
-
-export default Index;
-
+    return temparray;
+};
+var Index = function () {
+    return (React.createElement(react_bootstrap_1.Container, null, getThumbnailGroups(dummyDatas, 4).map(function (grp) {
+        return React.createElement(VideoThumbnail_1.VideoThumbnailGroup, { group: grp });
+    })));
+};
+Index.displayName = Index.name;
+exports.default = Index;
+//# sourceMappingURL=Index.js.map

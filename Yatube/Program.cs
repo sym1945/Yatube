@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Yatube.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(
+    new StaticFileOptions
+    { 
+        FileProvider = new PhysicalFileProvider("D:\\images"),
+        RequestPath = "/staticfiles"
+    }
+    );
 app.UseRouting();
 
 
